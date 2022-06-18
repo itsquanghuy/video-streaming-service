@@ -1,7 +1,7 @@
-from flask_admin.contrib.sqla import ModelView
-
 from main import admin, db
 from main.models.movie import MovieModel
+
+from .view import ModelView
 
 movie_model_view = ModelView(
     MovieModel,

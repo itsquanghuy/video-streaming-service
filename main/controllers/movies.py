@@ -57,6 +57,6 @@ def get_movie_file(movie_uuid, **__):
     # return response
 
     return send_from_directory(
-        os.path.join(app.root_path, "static", "movies"),
+        os.path.join(app.root_path, "movies"),
         f"{movie_uuid}.mp4",
     )

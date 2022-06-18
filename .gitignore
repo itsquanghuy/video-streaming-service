@@ -173,4 +173,4 @@ cython_debug/
 
 coverage_report/
 
-main/static/movies/
+main/movies/

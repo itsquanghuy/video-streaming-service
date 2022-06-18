@@ -2,6 +2,7 @@ from importlib import import_module
 
 from flask import Flask
 from flask_admin import Admin
+from flask_basicauth import BasicAuth
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -15,6 +16,7 @@ app.config.from_object(config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 admin = Admin(app)
+basic_auth = BasicAuth(app)
 
 CORS(app)
 

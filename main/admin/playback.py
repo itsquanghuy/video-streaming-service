@@ -1,7 +1,7 @@
-from flask_admin.contrib.sqla import ModelView
-
 from main import admin, db
 from main.models.playback import PlaybackModel
+
+from .view import ModelView
 
 
 class PlaybackModelView(ModelView):

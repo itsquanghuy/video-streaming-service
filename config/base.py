@@ -10,3 +10,6 @@ class BaseConfig:
     ITEMS_PER_PAGE = 25
     SECRET_KEY = ""
     ENCRYPT_KEY = b""
+
+    BASIC_AUTH_USERNAME = ""
+    BASIC_AUTH_PASSWORD = ""

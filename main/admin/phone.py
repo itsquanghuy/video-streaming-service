@@ -1,10 +1,11 @@
-from flask_admin.contrib.sqla import ModelView
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField
 from wtforms.validators import DataRequired
 
 from main import admin, db
 from main.models.phone import PhoneModel
+
+from .view import ModelView
 
 
 class PhoneForm(FlaskForm):
