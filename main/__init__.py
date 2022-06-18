@@ -1,10 +1,10 @@
 from importlib import import_module
 
 from flask import Flask
+from flask_admin import Admin
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from flask_admin import Admin
 
 from .commons.error_handlers import register_error_handlers
 from .config import config
@@ -25,8 +25,8 @@ def register_subpackages():
     for m in models.__all__:
         import_module("main.models." + m)
 
-    import main.controllers  # noqa
     import main.admin
+    import main.controllers  # noqa
 
 
 register_subpackages()

@@ -20,7 +20,9 @@ def test_get_playback_current_time_with_non_existent_movie(authorized_client, se
 def test_update_playback_current_time_successfully(authorized_client, session):
     movie = create_sample_movie(title="a", uuid="a", session=session)
 
-    response = authorized_client.put(MOVIE_URL.format(movie.id), json={"current_time": 1})
+    response = authorized_client.put(
+        MOVIE_URL.format(movie.id), json={"current_time": 1}
+    )
 
     assert response.status_code == 200
 
@@ -28,6 +30,8 @@ def test_update_playback_current_time_successfully(authorized_client, session):
 def test_update_negative_playback_current_time(authorized_client, session):
     movie = create_sample_movie(title="a", uuid="a", session=session)
 
-    response = authorized_client.put(MOVIE_URL.format(movie.id), json={"current_time": -1})
+    response = authorized_client.put(
+        MOVIE_URL.format(movie.id), json={"current_time": -1}
+    )
 
     assert response.status_code == 400

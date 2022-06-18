@@ -1,10 +1,14 @@
 from flask import jsonify
 
 from main import app
-from main.commons.decorators import parse_args_with, validate_movie, require_authorized_phone
-from main.engines.playback import set_movie_playback_current_time, get_playback
-from main.schemas.playback import PlaybackCurrentTimeSchema
+from main.commons.decorators import (
+    parse_args_with,
+    require_authorized_phone,
+    validate_movie,
+)
 from main.commons.exceptions import BadRequest
+from main.engines.playback import get_playback, set_movie_playback_current_time
+from main.schemas.playback import PlaybackCurrentTimeSchema
 
 
 @app.get("/playbacks/<int:movie_id>/current-time")

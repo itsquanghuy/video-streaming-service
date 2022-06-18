@@ -1,1 +1,1 @@
-from . import movies, auth, playbacks
+from . import auth, movies, playbacks

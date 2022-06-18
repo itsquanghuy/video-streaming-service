@@ -8,7 +8,9 @@ from tests.helpers import create_sample_movie
 
 class TestMovies:
     @pytest.mark.parametrize("pages_argument", [2.5, 2.4, 2, 1.5, 1.4, 1, 0.5, 0.4])
-    def test_get_paginated_list_successfully(self, authorized_client, session, pages_argument):
+    def test_get_paginated_list_successfully(
+        self, authorized_client, session, pages_argument
+    ):
         number_of_movies = int(config.ITEMS_PER_PAGE * pages_argument)
         for i in range(number_of_movies):
             create_sample_movie(title=str(i), uuid=str(i), session=session)
@@ -21,9 +23,9 @@ class TestMovies:
             if page < pages:
                 assert len(response.json["items"]) == config.ITEMS_PER_PAGE
             else:
-                assert len(
-                    response.json["items"]
-                ) == number_of_movies - (config.ITEMS_PER_PAGE * (pages - 1))
+                assert len(response.json["items"]) == number_of_movies - (
+                    config.ITEMS_PER_PAGE * (pages - 1)
+                )
 
     def test_get_paginated_list_with_invalid_page_param(self, authorized_client):
         response = authorized_client.get("/movies?page=0")

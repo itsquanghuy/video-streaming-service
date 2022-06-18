@@ -3,11 +3,15 @@ import os
 from flask import send_from_directory
 
 from main import app, config
-from main.commons.decorators import parse_args_with, validate_movie, require_authorized_phone
-from main.engines.movie import get_movies, get_movie_count
-from main.schemas.pagination import PaginationSchema
-from main.schemas.movie import MoviePaginationSchema, MovieSchema
+from main.commons.decorators import (
+    parse_args_with,
+    require_authorized_phone,
+    validate_movie,
+)
 from main.commons.exceptions import BadRequest
+from main.engines.movie import get_movie_count, get_movies
+from main.schemas.movie import MoviePaginationSchema, MovieSchema
+from main.schemas.pagination import PaginationSchema
 
 
 @app.get("/movies")
@@ -24,12 +28,14 @@ def index(args, **__):
         items_per_page=config.ITEMS_PER_PAGE,
     )
 
-    return MoviePaginationSchema().jsonify({
-        "items_per_page": config.ITEMS_PER_PAGE,
-        "page": page,
-        "total_items": get_movie_count(),
-        "items": movies,
-    })
+    return MoviePaginationSchema().jsonify(
+        {
+            "items_per_page": config.ITEMS_PER_PAGE,
+            "page": page,
+            "total_items": get_movie_count(),
+            "items": movies,
+        }
+    )
 
 
 @app.get("/movies/<int:movie_id>")
@@ -50,4 +56,7 @@ def get_movie_file(movie_uuid, **__):
     #     response.data = f.read()
     # return response
 
-    return send_from_directory(os.path.join(app.root_path, "static", "movies"), f"{movie_uuid}.mp4")
+    return send_from_directory(
+        os.path.join(app.root_path, "static", "movies"),
+        f"{movie_uuid}.mp4",
+    )

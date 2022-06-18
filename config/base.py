@@ -9,4 +9,4 @@ class BaseConfig:
 
     ITEMS_PER_PAGE = 25
     SECRET_KEY = ""
-    ENCRYPT_KEY = b''
+    ENCRYPT_KEY = b""

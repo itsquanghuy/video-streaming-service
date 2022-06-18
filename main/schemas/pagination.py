@@ -1,4 +1,4 @@
-from marshmallow import fields, post_load
+from marshmallow import fields
 
 from .base import BaseSchema
 

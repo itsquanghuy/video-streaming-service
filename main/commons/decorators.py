@@ -10,15 +10,17 @@ from main.libs.jwt import get_jwt_data, get_jwt_token
 
 
 def get_request_args():
-    if request.method == 'GET':
+    if request.method == "GET":
         return request.args.to_dict()
     return request.get_json() or {}
 
 
 def parse_args_with(schema):
     """
-    This decorator can be used to parse arguments of a request using a Marshmallow schema. If there is any validation
-    error, a BadRequest exception will be raised along with the error details.
+    This decorator can be used to parse
+    arguments of a request using a Marshmallow schema.
+    If there is any validation error,
+    a BadRequest exception will be raised along with the error details.
     """
 
     def parse_args_with_decorator(f):
@@ -29,7 +31,7 @@ def parse_args_with(schema):
                 parsed_args = schema.load(request_args)
             except ValidationError as exc:
                 raise BadRequest(error_message=exc.messages)
-            kwargs['args'] = parsed_args
+            kwargs["args"] = parsed_args
             return f(**kwargs)
 
         return decorated_function
