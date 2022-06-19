@@ -55,7 +55,6 @@ def get_movie_file(movie_uuid, **__):
 
 
 @app.get("/movies/<string:movie_uuid>/poster")
-# @require_authorized_phone
 def get_movie_poster(movie_uuid, **__):
     return send_from_directory(
         os.path.join(app.root_path, "movies"),
