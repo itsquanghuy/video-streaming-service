@@ -48,15 +48,16 @@ def get_movie_(movie, **__):
 @app.get("/movies/<string:movie_uuid>")
 @require_authorized_phone
 def get_movie_file(movie_uuid, **__):
-    # Enforce user not to download the file on the web
-    # response = make_response()
-    # response.headers["Content-Disposition"] = "video/mp4; filename=test.mp4;"
-    # response.headers["Content-Type"] = "application/mp4"
-    # with open(os.path.join(app.root_path, "static", "movies", filename), "rb") as f:
-    #     response.data = f.read()
-    # return response
-
     return send_from_directory(
         os.path.join(app.root_path, "movies"),
         f"{movie_uuid}.mp4",
+    )
+
+
+@app.get("/movies/<string:movie_uuid>/poster")
+# @require_authorized_phone
+def get_movie_poster(movie_uuid, **__):
+    return send_from_directory(
+        os.path.join(app.root_path, "movies"),
+        f"{movie_uuid}.jpg",
     )

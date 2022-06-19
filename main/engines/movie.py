@@ -4,7 +4,12 @@ from main.models.movie import MovieModel
 
 
 def get_movies(page: int, items_per_page: int) -> List[MovieModel]:
-    return MovieModel.query.paginate(page, items_per_page, False).items
+    return (
+        MovieModel.query.order_by(MovieModel.title)
+        .order_by(MovieModel.release_year)
+        .paginate(page, items_per_page, False)
+        .items
+    )
 
 
 def get_movie(movie_id: int) -> Optional[MovieModel]:

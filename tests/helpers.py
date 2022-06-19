@@ -51,7 +51,7 @@ def create_sample_phone(session) -> PhoneModel:
 
 
 def create_sample_movie(title: str, uuid: str, session) -> MovieModel:
-    movie = MovieModel(title=title, description="a", uuid=uuid)
+    movie = MovieModel(title=title, description="a", uuid=uuid, release_year=1970)
     session.add(movie)
     session.commit()
     return movie

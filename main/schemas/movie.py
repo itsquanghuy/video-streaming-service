@@ -9,6 +9,7 @@ class MovieSchema(BaseSchema):
     title = fields.String(required=True)
     description = fields.String(required=True)
     uuid = fields.String(required=True)
+    release_year = fields.Integer(required=True)
 
 
 class MoviePaginationSchema(PaginationSchema):
