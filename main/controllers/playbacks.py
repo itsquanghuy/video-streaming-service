@@ -11,7 +11,7 @@ from main.engines.playback import get_playback, set_movie_playback_current_time
 from main.schemas.playback import PlaybackCurrentTimeSchema
 
 
-@app.get("/playbacks/<int:movie_id>/current-time")
+@app.get("/playbacks/<string:movie_uuid>/current-time")
 @require_authorized_phone
 @validate_movie
 def get_playback_(phone, movie, **__):
@@ -24,7 +24,7 @@ def get_playback_(phone, movie, **__):
     return PlaybackCurrentTimeSchema().jsonify(playback)
 
 
-@app.put("/playbacks/<int:movie_id>/current-time")
+@app.put("/playbacks/<string:movie_uuid>/current-time")
 @require_authorized_phone
 @validate_movie
 @parse_args_with(PlaybackCurrentTimeSchema())

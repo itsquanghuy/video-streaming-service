@@ -42,12 +42,12 @@ def parse_args_with(schema):
 def validate_movie(f):
     @wraps(f)
     def wrapper(**kwargs):
-        movie_id = kwargs["movie_id"]
+        movie_uuid = kwargs["movie_uuid"]
 
-        movie = get_movie(movie_id)
+        movie = get_movie(movie_uuid)
 
         if movie is None:
-            raise NotFound(error_message=f"Movie with id {movie_id} not found.")
+            raise NotFound(error_message=f"Movie with uuid {movie_uuid} not found.")
 
         kwargs["movie"] = movie
 

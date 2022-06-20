@@ -9,8 +9,8 @@ from main.commons.decorators import (
     validate_movie,
 )
 from main.commons.exceptions import BadRequest
-from main.engines.movie import get_movie_count, get_movies
-from main.schemas.movie import MoviePaginationSchema, MovieSchema
+from main.engines.movie import get_movie_count, get_movie_series_metadata, get_movies
+from main.schemas.movie import MoviePaginationSchema, MovieSchema, MovieSeriesSchema
 from main.schemas.pagination import PaginationSchema
 
 
@@ -38,14 +38,31 @@ def index(args, **__):
     )
 
 
-@app.get("/movies/<int:movie_id>")
+@app.get("/movies/<string:movie_uuid>")
 @require_authorized_phone
 @validate_movie
 def get_movie_(movie, **__):
     return MovieSchema().jsonify(movie)
 
 
-@app.get("/movies/<string:movie_uuid>")
+@app.get("/movies/<string:movie_uuid>/series")
+@require_authorized_phone
+@validate_movie
+def get_movie_series(movie, **__):
+    if not movie.is_a_series:
+        raise BadRequest(error_message="This movie is not a movie series.")
+
+    metadata = get_movie_series_metadata(movie)
+
+    return MovieSeriesSchema().jsonify(
+        {
+            "metadata": metadata,
+            "series": sorted(movie.series, key=lambda episode: episode.uuid),
+        }
+    )
+
+
+@app.get("/movies/<string:movie_uuid>/media")
 @require_authorized_phone
 def get_movie_file(movie_uuid, **__):
     return send_from_directory(

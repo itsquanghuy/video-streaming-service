@@ -26,7 +26,7 @@ class PhoneModelView(ModelView):
 phone_model_view = PhoneModelView(
     PhoneModel,
     db.session,
-    name="User",
+    name="Phone",
 )
 
 admin.add_view(phone_model_view)
