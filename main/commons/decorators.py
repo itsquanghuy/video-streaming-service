@@ -4,7 +4,7 @@ from flask import request
 from marshmallow import ValidationError
 
 from main.commons.exceptions import BadRequest, NotFound, Unauthorized
-from main.engines.movie import get_movie
+from main.engines.movie import get_movie, get_movie_series_episode
 from main.engines.phone import find_phone_by_uuid
 from main.libs.jwt import get_jwt_data, get_jwt_token
 
@@ -50,6 +50,23 @@ def validate_movie(f):
             raise NotFound(error_message=f"Movie with uuid {movie_uuid} not found.")
 
         kwargs["movie"] = movie
+
+        return f(**kwargs)
+
+    return wrapper
+
+
+def validate_movie_episode(f):
+    @wraps(f)
+    def wrapper(**kwargs):
+        episode_uuid = kwargs["episode_uuid"]
+
+        episode = get_movie_series_episode(episode_uuid)
+
+        if episode is None:
+            raise NotFound(error_message=f"Episode with uuid {episode_uuid} not found.")
+
+        kwargs["episode"] = episode
 
         return f(**kwargs)
 

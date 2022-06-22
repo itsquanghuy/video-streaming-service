@@ -18,18 +18,18 @@ class MovieModel(db.Model):
         return f"<MovieModel {self.id}>"
 
 
-class MovieSeriesModel(db.Model):
-    __tablename__ = "movie_series"
+class EpisodeModel(db.Model):
+    __tablename__ = "episode"
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), unique=True, nullable=False)
     description = db.Column(db.Text, nullable=False)
     season = db.Column(db.Integer, nullable=False)
-    episode = db.Column(db.Integer, nullable=False)
+    volume = db.Column(db.Integer, nullable=False)
     uuid = db.Column(db.String(36), unique=True, nullable=False)
     movie_id = db.Column(db.Integer, db.ForeignKey("movie.id"))
 
-    movie = db.relationship("MovieModel", backref="series")
+    movie = db.relationship("MovieModel", backref="episodes")
 
     def __str__(self):
         return self.title

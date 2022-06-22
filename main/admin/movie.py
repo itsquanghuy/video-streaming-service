@@ -1,5 +1,5 @@
 from main import admin, db
-from main.models.movie import MovieModel, MovieSeriesModel
+from main.models.movie import EpisodeModel, MovieModel
 
 from .view import ModelView
 
@@ -9,7 +9,7 @@ movie_model_view = ModelView(
     name="Movie",
 )
 
-movie_series_model_view = ModelView(MovieSeriesModel, db.session, name="Movie Series")
+episode_model_view = ModelView(EpisodeModel, db.session, name="Movie Episodes")
 
 admin.add_view(movie_model_view)
-admin.add_view(movie_series_model_view)
+admin.add_view(episode_model_view)

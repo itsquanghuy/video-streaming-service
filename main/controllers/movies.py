@@ -10,7 +10,7 @@ from main.commons.decorators import (
 )
 from main.commons.exceptions import BadRequest
 from main.engines.movie import get_movie_count, get_movie_series_metadata, get_movies
-from main.schemas.movie import MoviePaginationSchema, MovieSchema, MovieSeriesSchema
+from main.schemas.movie import MoviePaginationSchema, MovieSeriesSchema
 from main.schemas.pagination import PaginationSchema
 
 
@@ -38,14 +38,7 @@ def index(args, **__):
     )
 
 
-@app.get("/movies/<string:movie_uuid>")
-@require_authorized_phone
-@validate_movie
-def get_movie_(movie, **__):
-    return MovieSchema().jsonify(movie)
-
-
-@app.get("/movies/<string:movie_uuid>/series")
+@app.get("/movies/<string:movie_uuid>/episodes")
 @require_authorized_phone
 @validate_movie
 def get_movie_series(movie, **__):
@@ -57,7 +50,7 @@ def get_movie_series(movie, **__):
     return MovieSeriesSchema().jsonify(
         {
             "metadata": metadata,
-            "series": sorted(movie.series, key=lambda episode: episode.uuid),
+            "series": sorted(movie.episodes, key=lambda volume: volume.uuid),
         }
     )
 
