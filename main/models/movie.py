@@ -22,7 +22,7 @@ class EpisodeModel(db.Model):
     __tablename__ = "episode"
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), unique=True, nullable=False)
+    title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
     season = db.Column(db.Integer, nullable=False)
     volume = db.Column(db.Integer, nullable=False)

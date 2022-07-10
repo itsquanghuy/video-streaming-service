@@ -19,6 +19,7 @@ class MovieSeriesSchema(BaseSchema):
         title = fields.String(required=True)
         description = fields.String(required=True)
         season = fields.Integer(required=True, dump_only=True)
+        volume = fields.Integer(required=True, dump_only=True)
         episode = fields.Integer(required=True, dump_only=True)
         uuid = fields.String(required=True)
 

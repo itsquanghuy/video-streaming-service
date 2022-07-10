@@ -39,7 +39,7 @@ def index(args, **__):
 
 
 @app.get("/movies/<string:movie_uuid>/episodes")
-@require_authorized_phone
+# @require_authorized_phone
 @validate_movie
 def get_movie_series(movie, **__):
     if not movie.is_a_series:
